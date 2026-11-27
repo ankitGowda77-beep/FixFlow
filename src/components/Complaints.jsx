@@ -1,4 +1,4 @@
-
+import API_BASE_URL from "../config/api";
 import { useState, useEffect } from "react";
 import StatusBadge from "./StatusBadge";
 import { Search, Filter } from "lucide-react";
@@ -17,7 +17,7 @@ function Complaints() {
     const fetchComplaints = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/complaints"
+          `${API_BASE_URL}/api/complaints`
         );
 
         if (!response.ok) {

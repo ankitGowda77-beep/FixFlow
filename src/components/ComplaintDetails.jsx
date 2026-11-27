@@ -1,4 +1,4 @@
-
+import API_BASE_URL from "../config/api";
 import { useEffect, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import {
@@ -48,7 +48,7 @@ function ComplaintDetails() {
     const fetchComplaint = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/complaints/${id}`
+          `${API_BASE_URL}/api/complaints/${id}`
         );
 
         const data = await response.json();
@@ -123,45 +123,46 @@ function ComplaintDetails() {
       return;
     }
 
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/complaints/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            title: editForm.title.trim(),
-            category: editForm.category,
-            priority: editForm.priority,
-            location: editForm.location.trim(),
-            description: editForm.description.trim()
-          })
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || result.message);
-      }
-
-      updateComplaint({
-        ...editForm,
+   
+try {
+  const response = await fetch(
+    `${API_BASE_URL}/api/complaints/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         title: editForm.title.trim(),
+        category: editForm.category,
+        priority: editForm.priority,
         location: editForm.location.trim(),
         description: editForm.description.trim()
-      });
-
-      setIsEditing(false);
-      alert("Complaint updated successfully!");
-    } catch (error) {
-      alert(error.message || "Failed to update complaint.");
+      })
     }
-  };
+  );
 
-  const handleEditCancel = () => {
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || result.message);
+  }
+
+  updateComplaint({
+    ...editForm,
+    title: editForm.title.trim(),
+    location: editForm.location.trim(),
+    description: editForm.description.trim()
+  });
+
+  setIsEditing(false);
+  alert("Complaint updated successfully!");
+} catch (error) {
+  alert(error.message || "Failed to update complaint.");
+}
+};
+
+const handleEditCancel = () => {
     setEditForm({
       title: complaint.title,
       category: complaint.category,
@@ -185,7 +186,7 @@ function ComplaintDetails() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/complaints/${id}`,
+        `${API_BASE_URL}/api/complaints/${id}`,
         {
           method: "DELETE"
         }
@@ -208,7 +209,7 @@ function ComplaintDetails() {
   const handleStatusChange = async (newStatus) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/complaints/${id}`,
+        `${API_BASE_URL}/api/complaints/${id}`,
         {
           method: "PUT",
           headers: {
@@ -246,7 +247,7 @@ function ComplaintDetails() {
   const handleTechnicianChange = async (technicianName) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/complaints/${id}`,
+        `${API_BASE_URL}/api/complaints/${id}`,
         {
           method: "PUT",
           headers: {
@@ -278,7 +279,7 @@ function ComplaintDetails() {
   const handleResolutionSave = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/complaints/${id}`,
+        `${API_BASE_URL}/api/complaints/${id}`,
         {
           method: "PUT",
           headers: {

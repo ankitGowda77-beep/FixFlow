@@ -1,4 +1,4 @@
-
+import API_BASE_URL from "../config/api";
 import { useState, useEffect } from "react";
 import { Search, Users, Wrench, CheckCircle } from "lucide-react";
 
@@ -21,7 +21,7 @@ function Technicians() {
     const fetchComplaints = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/complaints"
+          `${API_BASE_URL}/api/complaints`
         );
 
         if (!response.ok) {

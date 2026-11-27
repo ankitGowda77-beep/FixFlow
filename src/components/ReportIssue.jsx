@@ -1,4 +1,4 @@
-
+import API_BASE_URL from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 
@@ -86,7 +86,7 @@ function ReportIssue() {
       };
 
       const response = await fetch(
-        "http://localhost:5000/api/complaints",
+        `${API_BASE_URL}/api/complaints`,
         {
           method: "POST",
           headers: {

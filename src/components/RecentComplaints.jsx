@@ -1,4 +1,4 @@
-
+import API_BASE_URL from "../config/api";
 import { useEffect, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ function RecentComplaints() {
     const fetchComplaints = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/complaints"
+          `${API_BASE_URL}/api/complaints`
         );
 
         if (!response.ok) {
